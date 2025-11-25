@@ -1,0 +1,47 @@
+
+✅Git is a distributed version control system used by developers to track changes in source code like:
+🔥 In simple words:
+Git helps you:
+1.Save different versions of your project
+2.Go back to any previous version
+3.Work on new features without breaking main code
+4.Collaborate with teams safely
+
+Example:
+If your project breaks today, you can restore yesterday’s project working version using Git.
+
+//==================================================================================================================
+
+✅A version control system(VCS), that track changes in source code as different people and teams collaborate on projects together. 
+VCS Can be Centralized (CVCS) or Distributed (DVCS)
+
+Developers can review project history to find out:
+
+1.Who made the changes?
+2.Which changes were made?
+3.When were the changes made?
+4.Why were changes needed?
+
+
+✅⭐ Simple Explanation
+
+Version Control System (VCS) is like a category.
+(Example: a “vehicle” category)
+
+Git is one tool inside this category.
+(Example: a “car” inside the vehicle category)
+
+So,
+👉 Every Git is a VCS, but not every VCS is Git.
+
+//=============================================================================================================
+
+| Centralized                                                    | Distributed                    |
+| -------------------------------------                          | ------------------------------ |
+| All code and history are stored in one central server.         | Every developer has a full copy of the repository (all files + full history) on their own computer.|
+| Can't work without server                                      | Can work even offline          |
+| If server crashes → project data lost                          | Many backups across developers |
+| Examples: SVN (Subversion)                                     | Example: Git                   |
+
+
+
