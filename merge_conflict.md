@@ -28,25 +28,32 @@ dev edits line 20
 Then Git auto-merges without conflict.
 
 
-🗂️ Tools for Easier Conflict Resolution
-VSCode built-in merge tool
-GitKraken
-Sourcetree
-IntelliJ / CLion merge tools
 
+🗂️ Tools for Easier Conflict Resolution
+1. VSCode built-in merge tool
+2. Git mergetool
+3. GitHub Web Editor
+3. GitKraken
+4. Sourcetree
+5. IntelliJ / CLion merge tools
+
+===================================================================================================================
 ✅🛠️ STEP-BY-STEP: HOW TO RESOLVE MERGE CONFLICTS:
 
 Quick checklist (before anything)
+Step:1
 # see conflict state 
 git status
 
+Step:2
 # list conflicted files
-git diff --name-only --diff-filter=U
+git diff --name-only --diff-filter=U    👉 It shows only the names of files that currently have merge conflicts
 
+Step:3
 # inspect conflict details in a file
 git diff <file>
 
-//==================================================================================================================
+
 
 ✅Method A — Manual edit (the basic way)
 
@@ -64,7 +71,6 @@ When a conflict appears, Git inserts special conflict markers in the file:
 
 
 🛠️ FULL STEP-BY-STEP METHOD (Manual Edit)
-
 ⭐STEP 1 — Open the conflicted file
 You can use any editor:
 Windows CMD:
@@ -78,9 +84,7 @@ code file.txt
 Inside the file, search for:
 
 <<<<<<<
-
 =======
-
 >>>>>>>
 These mark the exact area where Git is confused.
 
@@ -114,9 +118,7 @@ cout << "Combined update by Kapil Papa jii";
 After choosing the final content, remove the conflict markers:
 
 <<<<<<< HEAD
-
 =======
-
 >>>>>>> feature-branch
 
 
@@ -145,7 +147,7 @@ Git will continue applying the remaining commits.
    OR
    git rebase --continue (for rebase)
 
-//================================================================================================================
+====================================================================================================================
 
 ✅⭐Method B — Accept one side entirely and Discard other (pick ours / theirs):
 keep one version and discard the other. 
@@ -210,50 +212,60 @@ When to use:
 ✅ You don't need your changes
 
 
-//=================================================================================================================
+====================================================================================================================
 
 ✅⭐ Method C — Resolve Merge Conflicts Using git mergetool (GUI Tools)
-This method is perfect if you prefer a visual tool instead of manually editing text.
+git mergetool is a command used to resolve merge conflicts using a visual tool instead of editing manually.
 
-🔥 What is a mergetool?
+🔥 What is a mergetool ?
 A mergetool is a graphical interface (GUI) that shows:
-OURS version
-THEIRS version
-BASE version (original file before both branches edited it)
-And lets you choose or combine content visually.
-No need to manually type or find conflict markers.
+1. OURS version (your code)
+2. THEIRS version (incoming code changes)
+3. BASE version (original code before both branches edited it)
+4. And lets you choose or combine content visually.
+5. No need to manually type or find conflict markers.
+
 
 🎯 Why use Mergetool?
 Because it:
 ✔ Provides buttons to pick “ours” or “theirs”
 ✔ Makes conflicts easier to SEE
-✔ Colors changes
+✔ No need to manually remove markers
 ✔ Avoids mistakes
 ✔ Faster for big files
 
 🧠 Examples of mergetools:
 VS Code (most common)
+P4Merge
+WinMerge
 KDiff3
 Meld
 Beyond Compare
-P4Merge
-WinMerge
 
-🚀 STEP 1 — Configure a mergetool
-⭐ Example: Configure VS Code as mergetool
-Run these commands once (only first time):
-git config --global merge.tool vscode
-git config --global mergetool.vscode.cmd "code --wait $MERGED"
 
-What this does:
-Tells Git that your merge tool is VS Code
-When Git calls for merge, it runs:
-"code --wait"
+
+✅🔥 Configure Git to use VS Code a mergetool
+🚀 STEP 1:
+git config --global merge.tool code
+git config --global mergetool.code.cmd "code --wait $MERGED"
+git config --global mergetool.prompt false
+
+🧠 What these mean:
+merge.tool code → Tells Git that your merge tool is VS Code
+code --wait $MERGED → Git waits until you close VS Code
+prompt false → skips confirmation
+
+When Git calls for merge, it runs: "code --wait"
 meaning: open file in VS Code and wait until you close it
 
 
-🚀 STEP 2 — Run mergetool
-When a merge conflict occurs, simply run:
+⚔️ STEP 2: Trigger a Merge Conflict (Practice)
+git merge feature
+👉 Conflict happens ❌
+
+
+🚀 STEP 3:  Run mergetool
+When a merge conflict occurs, simply run: git mergetool
 What happens next:
 A GUI opens (VS Code window)
 Each conflicted file opens one by one
@@ -266,11 +278,11 @@ You see:
 
 In VS Code:
 You get clickable options:
-Accept Current Change (OURS)
-Accept Incoming Change (THEIRS)
-Accept Both Changes
-Compare changes
-Manual editing in the final window
+✅ Accept Current Change (OURS)
+✅ Accept Incoming Change (THEIRS)
+✅ Accept Both Changes
+✅ Compare Changes
+✅Manual editing in the final window
 
 📝 After resolving in GUI:
 Simply Save and Close.
@@ -282,22 +294,8 @@ After all files are resolved:  git commit
 This completes the merge.
 
 
-⭐ Alternative Method (VS Code only)
 
-VS Code itself shows a built-in merge conflict interface.
-Just open your project:
-code .
-
-VS Code will show:
-Side-by-side conflicts
-Highlighted blocks
-Buttons to accept/reject changes
-Fix all files manually, then:
-git add -A
-git commit
-
-
-🏁 FINAL SUMMARY (Very Easy to Remember)
+✅🏁 FINAL SUMMARY (Very Easy to Remember)
 | Step | Action                                  |
 | ---- | --------------------------------------- |
 | 1    | Configure mergetool (VS Code or others) |
@@ -307,3 +305,28 @@ git commit
 | 5    | Git auto-stages the file                |
 | 6    | Run `git commit` to finish              |
 
+
+
+✅⚔️ Detailed Comparison
+| Feature            | `git difftool`           | `git mergetool`              |
+| ------------------ | ------------------------ | ---------------------------- |
+| Purpose            | View differences         | Resolve merge conflicts      |
+| When used          | Before merging / anytime | After conflict happens       |
+| Output             | Comparison view          | Editable merge UI            |
+| Conflict required? | ❌ No                     | ✅ Yes                     |
+| Editing needed?    | ❌ No (read-only)         | ✅ Yes (you fix code)      |
+| Example tools      | Visual Studio Code, Meld | Same tools but in merge mode |
+| Command            | `git difftool`           | `git mergetool`              |
+
+
+
+🔍 1️⃣ git difftool (View Differences)
+👉 git difftool Shows difference between:
+working directory vs commit
+branch vs branch
+file vs file
+
+Example:
+git difftool main feature
+👉 Opens side-by-side comparison
+👉 You cannot resolve conflicts here
