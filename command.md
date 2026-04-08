@@ -580,6 +580,31 @@ Green color = something added
 Red color = removed
 Filename with space → must use quotes.
 
+
+
+✅git diff --name-only --diff-filter=U
+
+🔍 Breakdown of each part:
+1️⃣ 👉 Git diff
+Compares changes in your working directory and Last committed version.
+Shows differences between versions
+
+2️⃣ --name-only
+👉 Instead of showing full code differences:
+Shows only file names
+Example output:
+file1.cpp
+main.cpp
+utils.h
+
+3️⃣ --diff-filter=U
+👉 This is the most important part
+U = Unmerged files
+Means files that have merge conflicts
+
+
+
+
 ===================================================================================================================
 
 ✅ 14. Reset (Dangerous but useful)
